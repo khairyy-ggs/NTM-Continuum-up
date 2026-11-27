@@ -106,7 +106,10 @@ repositories {
     }
     maven("https://maven.createmod.net") {
         name = "CreateMod"
-        content { includeGroup("dev.engine-room.flywheel") }
+        content {
+            includeGroup("dev.engine-room.flywheel")
+            includeGroup("net.createmod.ponder")
+        }
     }
     exclusiveContent {
         forRepository { maven("https://cursemaven.com") { name = "CurseMaven" } }
@@ -425,6 +428,17 @@ dependencies {
     }
 }
 
+// Create Energy Shaft: the Create side (com.hbm.compat.create, the Shaft Output stress source) is its own source root,
+// src/create, added only on nodes that set `feature.create_shaft=true`. Create is compiled against, never shipped
+// or required (neoforge.mods.toml lists it as optional). It uses the same Modrinth version as the dev runs, deps.create_run.
+if (propOrNull("feature.create_shaft") == "true") {
+    sourceSets["main"].java.srcDir(rootProject.file("src/create/java"))
+    val createVersion = prop("deps.create_run")
+    dependencies {
+        compileOnly("maven.modrinth:create:$createVersion") { isTransitive = false }
+    }
+}
+
 if (propOrNull("deps.sable") != null) {
     sourceSets["main"].java.srcDir(rootProject.file("src/sable/java"))
     sourceSets["main"].java.srcDir(rootProject.file("src/sable-neoforge/java"))
@@ -658,4 +672,22 @@ if (propOrNull("kubejs.run") == "true" && propOrNull("deps.kubejs") != null) {
         val prepare = "prepare${task.removePrefix("run")}Run"
         tasks.matching { it.name == task || it.name == prepare }.configureEach { dependsOn(copy) }
     }
+}
+
+// Explicit Ponder API dependency for Create Energy Shaft.
+if (project.name == "1.21.1-neoforge" &&
+    propOrNull("feature.create_shaft") == "true") {
+    dependencies.add(
+        "compileOnly",
+        "net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1"
+    )
+}
+
+// Explicit Ponder API dependency for Create Energy Shaft.
+if (project.name == "1.21.1-neoforge" &&
+    propOrNull("feature.create_shaft") == "true") {
+    dependencies.add(
+        "compileOnly",
+        "net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1"
+    )
 }

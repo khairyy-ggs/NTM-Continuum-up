@@ -6,6 +6,7 @@ import com.hbm.api.tile.ILoadedTile;
 import com.hbm.tileentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
@@ -18,6 +19,10 @@ public class TileEntityCableBaseNT extends BlockEntity implements IEnergyConduct
 
     public TileEntityCableBaseNT(BlockPos pos, BlockState state) {
         super(ModBlockEntities.RED_CABLE.get(), pos, state);
+    }
+
+    protected TileEntityCableBaseNT(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override

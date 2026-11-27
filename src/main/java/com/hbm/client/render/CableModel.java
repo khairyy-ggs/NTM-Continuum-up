@@ -20,7 +20,12 @@ import java.util.Set;
  */
 public final class CableModel implements Disguises.Look {
 
-    private static final String SPRITE = "hbm:models/blocks/cable_neo";
+    private final String sprite;
+
+    public CableModel() { this("hbm:models/blocks/cable_neo"); }
+
+    public CableModel(String sprite) { this.sprite = sprite; }
+
     /** The OBJ is centred on the origin. */
     static final Matrix4fc CENTRE = new Matrix4f().translation(0.5F, 0.5F, 0.5F);
 
@@ -40,7 +45,7 @@ public final class CableModel implements Disguises.Look {
     @Override
     @SuppressWarnings("unchecked")
     public void mesh(Object key, Disguises.Meshes out) {
-        for (String part : (Set<String>) key) out.add(model().part(part), SPRITE, -1, CENTRE);
+        for (String part : (Set<String>) key) out.add(model().part(part), sprite, -1, CENTRE);
     }
 
     @Override

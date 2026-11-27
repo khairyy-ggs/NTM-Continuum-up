@@ -26,6 +26,7 @@ import com.hbm.blocks.machine.struct.BlockStruct;
 import com.hbm.tileentity.ModBlockEntities;
 import com.hbm.tileentity.machine.struct.TileEntityWatzStruct;
 import com.hbm.blocks.network.BlockCable;
+import com.hbm.blocks.network.BlockShaftCable;
 import com.hbm.blocks.network.FluidValve;
 import com.hbm.creativetabs.HbmTab;
 import com.hbm.creativetabs.ModTabs;
@@ -184,6 +185,50 @@ public final class ModMachineBlocks {
             .andThen(h -> States.multipart(h.namespace(), h.path())
                     .part(new Variant("hbm:block/machine_dummy_empty"))
                     .register())
+            .tag(BlockTag.PICKAXE);
+
+    public static final RegistryObject<BlockShaftCable> shaft_cable = REG.<BlockShaftCable>block(
+            "shaft_cable", BlockShaftCable::new,
+            p -> p.requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL).noOcclusion())
+            .loot(Loot.self())
+            .andThen(h -> States.multipart(h.namespace(), h.path())
+                    .part(new Variant("hbm:block/machine_dummy_empty"))
+                    .register())
+            .tag(BlockTag.PICKAXE);
+
+    public static final RegistryObject<MachineShaftTurbine> machine_shaft_turbine = REG.<MachineShaftTurbine>block(
+            "machine_shaft_turbine", MachineShaftTurbine::new,
+            p -> dummyable(p.strength(5.0F, 6.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()))
+            .model(d -> d.models(Models.parented("minecraft:block/air", Slots.of("particle", "hbm:blocks/block_steel"))).states(Variants.simple()))
+            .loot(Loot.self())
+            .tag(BlockTag.PICKAXE);
+
+       // BEGIN NTM SURVIVAL ENERGY EXPANSION - renewable source blocks
+    public static final RegistryObject<MachineSolarPanel> machine_solar_panel =
+            REG.<MachineSolarPanel>block(
+                    "machine_solar_panel",
+                    MachineSolarPanel::new,
+                    p -> p.requiresCorrectToolForDrops()
+                            .strength(3.5F, 5.0F)
+                            .sound(SoundType.METAL)
+                            .noOcclusion())
+                    .tag(BlockTag.PICKAXE);
+
+    public static final RegistryObject<MachineWindTurbine> machine_wind_turbine =
+            REG.<MachineWindTurbine>block(
+                    "machine_wind_turbine",
+                    MachineWindTurbine::new,
+                    p -> p.requiresCorrectToolForDrops()
+                            .strength(4.0F, 6.0F)
+                            .sound(SoundType.METAL)
+                            .noOcclusion())
+                    .tag(BlockTag.PICKAXE);
+    // END NTM SURVIVAL ENERGY EXPANSION - renewable source blocks
+    public static final RegistryObject<MachineVerticalHeatExchanger> machine_vertical_heat_exchanger =
+            REG.<MachineVerticalHeatExchanger>block("machine_vertical_heat_exchanger", MachineVerticalHeatExchanger::new,
+            p -> dummyable(p.strength(5.0F, 6.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()))
+            .model(d -> d.models(Models.parented("minecraft:block/air", Slots.of("particle", "hbm:blocks/block_steel"))).states(Variants.simple()))
+            .loot(Loot.self())
             .tag(BlockTag.PICKAXE);
 
     public static final RegistryObject<BlockCreativeGenerator> creative_generator = REG.<BlockCreativeGenerator>block(
@@ -692,7 +737,7 @@ public final class ModMachineBlocks {
             .loot(Loot.self())
             .tag(BlockTag.PICKAXE);
 
-    /** Flare Stack: vents or burns gas for power; 12-tall 3×3 tower. */
+    /** Flare Stack: vents or burns gas for power; 12-tall 3Ãƒâ€”3 tower. */
     public static final RegistryObject<MachineGasFlare> machine_flare = REG.<MachineGasFlare>block(
             "machine_flare", MachineGasFlare::new,
             p -> dummyable(p.strength(5.0F, 60.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()))
@@ -746,7 +791,7 @@ public final class ModMachineBlocks {
             .loot(Loot.self())
             .tag(BlockTag.PICKAXE);
 
-    /** Refinery: fractionates HOT oils into 4 products; 3×3×9 tower. */
+    /** Refinery: fractionates HOT oils into 4 products; 3Ãƒâ€”3Ãƒâ€”9 tower. */
     public static final RegistryObject<MachineRefinery> machine_refinery = REG.<MachineRefinery>block(
             "machine_refinery", MachineRefinery::new, // resistance: 1.7 setResistance(20) = 60/5 = 12 against explosions
             p -> dummyable(p.strength(5.0F, 12.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()))
@@ -976,7 +1021,7 @@ public final class ModMachineBlocks {
             .loot(Loot.self())
             .tag(BlockTag.PICKAXE);
 
-    /** Standard item centrifuge: a 1×1×4 tower with four output streams. */
+    /** Standard item centrifuge: a 1Ãƒâ€”1Ãƒâ€”4 tower with four output streams. */
     public static final RegistryObject<MachineCentrifuge> machine_centrifuge = REG.<MachineCentrifuge>block(
             "machine_centrifuge", MachineCentrifuge::new,
             p -> dummyable(p.strength(5.0F, 6.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()))
@@ -1262,6 +1307,13 @@ public final class ModMachineBlocks {
         tabItem(pa_dipole);
         tabItem(pa_detector);
         tabItem(red_cable);
+        tabItem(shaft_cable);
+        tabItem(machine_shaft_turbine);
+        // BEGIN NTM SURVIVAL ENERGY EXPANSION - creative tab items
+        tabItem(machine_solar_panel);
+        tabItem(machine_wind_turbine);
+        // END NTM SURVIVAL ENERGY EXPANSION - creative tab items
+        tabItem(machine_vertical_heat_exchanger);
         tabItem(creative_generator);
         tabItem(machine_large_turbine);
         tabItem(machine_turbine_gas);

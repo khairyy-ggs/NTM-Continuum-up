@@ -128,6 +128,8 @@ import com.hbm.inventory.gui.GUIMachineRefinery;
 import com.hbm.inventory.gui.GUIMachineShredder;
 import com.hbm.inventory.gui.GUIMachineSolderingStation;
 import com.hbm.inventory.gui.GUIMachineLargeTurbine;
+import com.hbm.inventory.gui.GUIMachineShaftTurbine;
+import com.hbm.inventory.gui.GUIMachineVerticalHeatExchanger;
 import com.hbm.inventory.gui.GUIMachineTurbineGas;
 import com.hbm.inventory.gui.GUIMachineTurbofan;
 import com.hbm.inventory.gui.GUIMachineVacuumDistill;
@@ -278,6 +280,8 @@ public final class HbmClientRegistrations {
         sink.register(ModMenus.LAUNCH_PAD.get(), GUILaunchPad::new);
         sink.register(ModMenus.TURRET_BASE.get(), GUITurretBase::new);
         sink.register(ModMenus.MACHINE_LARGE_TURBINE.get(), GUIMachineLargeTurbine::new);
+        sink.register(ModMenus.MACHINE_SHAFT_TURBINE.get(), GUIMachineShaftTurbine::new);
+        sink.register(ModMenus.MACHINE_VERTICAL_HEAT_EXCHANGER.get(), GUIMachineVerticalHeatExchanger::new);
         sink.register(ModMenus.MACHINE_TURBINE_GAS.get(), GUIMachineTurbineGas::new);
         sink.register(ModMenus.MACHINE_TURBOFAN.get(), GUIMachineTurbofan::new);
         sink.register(ModMenus.MACHINE_GAS_FLARE.get(), GUIMachineGasFlare::new);

@@ -44,6 +44,14 @@ versionRange = "(,0.1.22)"
 ordering = "NONE"
 side = "CLIENT"
 
+# Create Energy Shaft: the Shaft Output only registers when Create is present.
+[[dependencies.${mod_id}]]
+modId = "create"
+type = "optional"
+versionRange = "[6.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
 [[dependencies.${mod_id}]]
 modId = "minecraft"
 type = "required"

@@ -148,6 +148,8 @@ public final class HbmBlockEntityRenderers {
                 new ModelDef(obj("machines/blast_furnace.obj"), tex("machines/blast_furnace.png"))).doubleSided());
         regGem(sink, ModBlockEntities.MACHINE_INDUSTRIAL_TURBINE.get(), IndustrialTurbineRenderer::new);
          regGem(sink, ModBlockEntities.MACHINE_LARGE_TURBINE.get(), LargeTurbineRenderer::new);
+         regGem(sink, ModBlockEntities.MACHINE_SHAFT_TURBINE.get(), ShaftTurbineRenderer::new);
+         regGem(sink, ModBlockEntities.MACHINE_VERTICAL_HEAT_EXCHANGER.get(), VerticalHeatExchangerRenderer::new);
          regGem(sink, ModBlockEntities.MACHINE_TURBINE_GAS.get(), GasTurbineRenderer::new);
          regGem(sink, ModBlockEntities.MACHINE_TURBOFAN.get(), TurbofanRenderer::new);
          regGem(sink, ModBlockEntities.MACHINE_STEAM_ENGINE.get(), SteamEngineRenderer::new);

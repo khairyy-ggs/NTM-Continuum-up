@@ -33,6 +33,8 @@ import com.hbm.inventory.container.ContainerMachineAssemblyMachine;
 import com.hbm.inventory.container.ContainerMachineGasFlare;
 import com.hbm.inventory.container.ContainerMachineHydrotreater;
 import com.hbm.inventory.container.ContainerMachineLargeTurbine;
+import com.hbm.inventory.container.ContainerMachineShaftTurbine;
+import com.hbm.inventory.container.ContainerMachineVerticalHeatExchanger;
 import com.hbm.inventory.container.ContainerMachineMiningLaser;
 import com.hbm.inventory.container.ContainerMachineOilWell;
 import com.hbm.inventory.container.ContainerMachinePlasmaForge;
@@ -240,6 +242,12 @@ public final class ModMenus {
 
     public static final RegistryObject<MenuType<ContainerMachineLargeTurbine>> MACHINE_LARGE_TURBINE =
             REG.menu("machine_large_turbine", () -> Menus.typeWithPos(ContainerMachineLargeTurbine::new));
+
+    public static final RegistryObject<MenuType<ContainerMachineShaftTurbine>> MACHINE_SHAFT_TURBINE =
+            REG.menu("machine_shaft_turbine", () -> Menus.typeWithPos(ContainerMachineShaftTurbine::new));
+
+    public static final RegistryObject<MenuType<ContainerMachineVerticalHeatExchanger>> MACHINE_VERTICAL_HEAT_EXCHANGER =
+            REG.menu("machine_vertical_heat_exchanger", () -> Menus.typeWithPos(ContainerMachineVerticalHeatExchanger::new));
 
     public static final RegistryObject<MenuType<ContainerMachineTurbineGas>> MACHINE_TURBINE_GAS =
             REG.menu("machine_turbine_gas", () -> Menus.typeWithPos(ContainerMachineTurbineGas::new));

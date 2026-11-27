@@ -187,6 +187,11 @@ import com.hbm.tileentity.machine.TileEntityMachineBAT9000;
 import com.hbm.tileentity.machine.TileEntityDeuteriumExtractor;
 import com.hbm.tileentity.machine.TileEntityDeuteriumTower;
 import com.hbm.tileentity.network.TileEntityCableBaseNT;
+import com.hbm.tileentity.network.TileEntityShaftCable;
+import com.hbm.tileentity.machine.TileEntityMachineShaftTurbine;
+import com.hbm.tileentity.machine.TileEntityMachineSolarPanel;
+import com.hbm.tileentity.machine.TileEntityMachineWindTurbine;
+import com.hbm.tileentity.machine.TileEntityMachineVerticalHeatExchanger;
 import com.hbm.tileentity.network.TileEntityFluidDuctNT;
 import com.hbm.tileentity.network.TileEntityFluidValve;
 import net.minecraft.core.BlockPos;
@@ -263,6 +268,31 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<TileEntityCableBaseNT>> RED_CABLE =
             REG.blockEntity("red_cable",
                     () -> BlockEntities.type(TileEntityCableBaseNT::new, ModMachineBlocks.red_cable.get()));
+
+    public static final RegistryObject<BlockEntityType<TileEntityShaftCable>> SHAFT_CABLE =
+            REG.blockEntity("shaft_cable",
+                    () -> BlockEntities.type(TileEntityShaftCable::new, ModMachineBlocks.shaft_cable.get()));
+
+    public static final RegistryObject<BlockEntityType<TileEntityMachineShaftTurbine>> MACHINE_SHAFT_TURBINE =
+            REG.blockEntity("machine_shaft_turbine",
+                    () -> BlockEntities.ticking(TileEntityMachineShaftTurbine::new, TileEntityMachineShaftTurbine::clientTick,
+                            TileEntityMachineShaftTurbine::serverTick, ModMachineBlocks.machine_shaft_turbine.get()));
+
+    // BEGIN NTM SURVIVAL ENERGY EXPANSION - renewable source block entities
+    public static final RegistryObject<BlockEntityType<TileEntityMachineSolarPanel>> MACHINE_SOLAR_PANEL =
+            REG.blockEntity("machine_solar_panel", () -> BlockEntities.serverTicking(
+                    TileEntityMachineSolarPanel::new, TileEntityMachineSolarPanel::serverTick,
+                    ModMachineBlocks.machine_solar_panel.get()));
+
+    public static final RegistryObject<BlockEntityType<TileEntityMachineWindTurbine>> MACHINE_WIND_TURBINE =
+            REG.blockEntity("machine_wind_turbine", () -> BlockEntities.serverTicking(
+                    TileEntityMachineWindTurbine::new, TileEntityMachineWindTurbine::serverTick,
+                    ModMachineBlocks.machine_wind_turbine.get()));
+    // END NTM SURVIVAL ENERGY EXPANSION - renewable source block entities
+    public static final RegistryObject<BlockEntityType<TileEntityMachineVerticalHeatExchanger>> MACHINE_VERTICAL_HEAT_EXCHANGER =
+            REG.blockEntity("machine_vertical_heat_exchanger",
+                    () -> BlockEntities.ticking(TileEntityMachineVerticalHeatExchanger::new, TileEntityMachineVerticalHeatExchanger::clientTick,
+                            TileEntityMachineVerticalHeatExchanger::serverTick, ModMachineBlocks.machine_vertical_heat_exchanger.get()));
 
     public static final RegistryObject<BlockEntityType<TileEntityCreativeGenerator>> CREATIVE_GENERATOR =
             REG.blockEntity("creative_generator",
@@ -582,7 +612,7 @@ public final class ModBlockEntities {
         TemplateCrateLayout.setBlockEntityTypeSupplier(CRATE_TEMPLATE::get);
     }
 
-    // Scaffold machines (placeable + persistent; logic deferred, see IMPLEMENTATION.md §18)
+    // Scaffold machines (placeable + persistent; logic deferred, see IMPLEMENTATION.md Ã‚Â§18)
 
     public static final RegistryObject<BlockEntityType<TileEntityMachineElectricFurnace>> MACHINE_ELECTRIC_FURNACE =
             REG.blockEntity("machine_electric_furnace",

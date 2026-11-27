@@ -187,6 +187,7 @@ public class Fluids {
     public static FluidType SMOKE_POISON;
     public static FluidType HELIUM4;
     public static FluidType HEAVYWATER_HOT;
+    public static FluidType HOTWATER;
     public static FluidType SODIUM;
     public static FluidType SODIUM_HOT;
     public static FluidType THORIUM_SALT;
@@ -391,6 +392,7 @@ public class Fluids {
         AIRBLAST = new FluidType("AIRBLAST", 0xFFDADA); // 1.7 Fluids.java:414
         FLUE = new FluidType(155, "FLUE", 0x131313); // 1.7 asserts id 155 here
         TITANIUM_TETRACHLORIDE = new FluidType(156, "TITANIUM_TETRACHLORIDE", 0xDBF796);
+        HOTWATER = new FluidType("HOTWATER", 0x6C8FD6).setTemp(90); // Create Energy Shaft: appended last, IDs are positional
 
         // 1.7 Fluids.java:427-606, "AND DON'T FORGET THE META DOWN HERE": the display order (getInNiceOrder)
         // lists fluids in identifiers, creative tabs, NEI and the assembly machine's fluid packages. Every fluid exactly
@@ -568,6 +570,7 @@ public class Fluids {
         //bug meth
         metaOrder.add(PHEROMONE);
         metaOrder.add(PHEROMONE_M);
+        metaOrder.add(HOTWATER);
         // 1.7 then appends customFluids and foreignFluids; here addon and foreign fluids follow in registration
         // order (getInNiceOrder).
         if (metaOrder.size() != idMapping.size()) {

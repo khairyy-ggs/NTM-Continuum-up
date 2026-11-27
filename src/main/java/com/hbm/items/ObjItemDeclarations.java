@@ -2077,6 +2077,18 @@ public final class ObjItemDeclarations {
                 .definition(MachineObjModel.of("hbm:models/blocks/cable_neo.obj", "hbm:textures/models/blocks/cable_neo.png")
                         .scale(1.25).ty(0.0).yaw(180.0).frame("block").rawLegacyTransform().exclude("posY", "negY", "CX", "CY", "CZ")
                         .itemTranslate(0.0, 0.0, 0.0).itemPreTranslate(0.0, 0.0, 0.0)).oversizedInGui().register();
+        Dejson.item(NS, "machine_shaft_turbine")
+                .definition(MachineObjModel.of("hbm:models/machines/shaft_turbine.obj", "hbm:textures/models/machines/shaft_turbine.png")
+                        .scale(1.0).ty(0.0).yaw(90.0).guiScale(2.5).rawLegacyTransform()
+                        .itemTranslate(0.0, 0.0, 0.0).itemPreTranslate(0.0, 0.0, 0.0).guiTranslate(0.0, -1.0, 0.0)).oversizedInGui().register();
+        Dejson.item(NS, "machine_vertical_heat_exchanger")
+                .definition(MachineObjModel.of("hbm:models/machines/vertical_heat_exchanger.obj", "hbm:textures/models/machines/vertical_heat_exchanger.png")
+                        .scale(1.0).ty(0.0).yaw(0.0).guiScale(2.4).rawLegacyTransform()
+                        .itemTranslate(0.0, 0.0, 0.0).itemPreTranslate(0.0, 0.0, 0.0).guiTranslate(0.0, -1.5, 0.0)).oversizedInGui().register();
+        Dejson.item(NS, "shaft_cable")
+                .definition(MachineObjModel.of("hbm:models/blocks/cable_neo.obj", "hbm:textures/models/blocks/cable_shaft.png")
+                        .scale(1.25).ty(0.0).yaw(180.0).frame("block").rawLegacyTransform().exclude("posY", "negY", "CX", "CY", "CZ")
+                        .itemTranslate(0.0, 0.0, 0.0).itemPreTranslate(0.0, 0.0, 0.0)).oversizedInGui().register();
         Dejson.item(NS, "red_connector")
                 .definition(MachineObjModel.of("hbm:models/network/connector.obj", "hbm:textures/models/network/connector.png").scale(2.0)
                         .ty(0.0).yaw(0.0).guiScale(7.0).rawLegacyTransform().itemTranslate(0.0, 0.0, 0.0)

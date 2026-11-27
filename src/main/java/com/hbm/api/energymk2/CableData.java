@@ -3,14 +3,21 @@ package com.hbm.api.energymk2;
 import com.mojang.serialization.Codec;
 
 /**
- * The conductor datum for the power graph, and it carries NOTHING - a tier field was inert until it silently partitioned a world's power grid; rate limiting is the diode's job.
+ * The conductor datum for the power graph. Ordinary cables carry nothing. A shaft cable (the dedicated
+ * cable of the Create Energy Shaft) carries one flag, and the provider treats two cells as compatible
+ * only if the flags match, so shaft cells never merge into the ordinary grid.
  */
-public record CableData() {
+public record CableData(boolean shaft) {
 
-    public static final CableData INSTANCE = new CableData();
+    public static final CableData INSTANCE = new CableData(false);
+    public static final CableData SHAFT = new CableData(true);
 
     /**
-     * Numerically lenient on purpose: pre-v3 saves wrote the tier int at this position and any of them decodes to the singleton.
+     * Not 1: pre-v3 saves wrote a tier int here and every one of them must keep decoding to the
+     * ordinary cable. 0x53 never was a tier.
      */
-    public static final Codec<CableData> CODEC = Codec.BYTE.xmap(b -> INSTANCE, d -> (byte) 0);
+    private static final byte SHAFT_BYTE = 0x53;
+
+    public static final Codec<CableData> CODEC =
+            Codec.BYTE.xmap(b -> b == SHAFT_BYTE ? SHAFT : INSTANCE, d -> d.shaft() ? SHAFT_BYTE : (byte) 0);
 }

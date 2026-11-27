@@ -155,6 +155,7 @@ public final class ChunkModelRegistrations {
         Disguises.register(ModFluidNetBlocks.fluid_duct_paintable, PAINTED_DUCT);
         Disguises.register(ModFluidNetBlocks.fluid_duct_paintable_block_exhaust, PAINTED_DUCT);
         Disguises.register(ModMachineBlocks.red_cable, new CableModel());
+        Disguises.register(ModMachineBlocks.shaft_cable, new CableModel("hbm:models/blocks/cable_shaft"));
         NeoDuctModel neo = new NeoDuctModel();
         Disguises.register(ModFluidNetBlocks.fluid_duct_neo, neo);
         Disguises.register(ModFluidNetBlocks.fluid_duct_neo_silver, neo);

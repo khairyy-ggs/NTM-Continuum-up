@@ -1,18 +1,18 @@
 # Hand-tuned JSON that stays an authored file under src/main/resources (rule of 2026-09-30).
 #
 # Dejson declares uniform boilerplate only: sprite items, cube_all-style parent+texture blocks, simple
-# blockstates, loot, tags, recipes. A file whose content is hand-tuned — custom `elements` geometry, `display`
-# transforms, one-off raw OBJ item definitions — is written and edited as JSON (Blockbench can open it), never
+# blockstates, loot, tags, recipes. A file whose content is hand-tuned â€” custom `elements` geometry, `display`
+# transforms, one-off raw OBJ item definitions â€” is written and edited as JSON (Blockbench can open it), never
 # transliterated into Element.box(...).face(...) chains or JsonObject calls.
 #
 # One path per line, relative to src/main/resources; a line ending in `/` exempts a whole folder.
 # Read by ../Golem-Core/gradle/mod/dejson.gradle.kts through golem.build.dejson.authored (dejsonOwnership: a
 # listed file may be authored in a Dejson-owned folder, and a listed path that does not exist fails the build)
 # and by port-tools/generator_safety.py (generators may not write these files either). Taking a file back from
-# a declaration: add it here AND delete the declaration — an authored file silently wins over a declaration at
+# a declaration: add it here AND delete the declaration â€” an authored file silently wins over a declaration at
 # the same path.
 #
-# Origin: 2026-09-30 (History §19eg-dejson-authored) restored the 251 files the §19ed-dejson / d607d2d5
+# Origin: 2026-09-30 (History Â§19eg-dejson-authored) restored the 251 files the Â§19ed-dejson / d607d2d5
 # migrations had turned into BlockModelDeclarations, ContentItemModels, ItemModelDeclarations and inline
 # SpriteItemDeclarations / StructureWandDeclarations geometry.
 
@@ -277,3 +277,22 @@ assets/hbm/models/item/machine_obj_legacy.json
 assets/hbm/models/item/machine_weapon_table.json
 assets/hbm/models/item/pneumatic_tube.json
 # Machine recipe tables are not here: they are generated from src/recipes at build time (gradle/recipe-tables.gradle.kts).
+assets/hbm/blockstates/shaft_output.json
+assets/hbm/models/block/shaft_output.json
+data/hbm/loot_table/blocks/shaft_output.json
+data/hbm/recipe/shaft_cable.json
+data/hbm/recipe/machine_shaft_turbine.json
+data/hbm/recipe/shaft_output.json
+data/hbm/recipe/machine_vertical_heat_exchanger.json
+assets/hbm/blockstates/machine_solar_panel.json
+assets/hbm/blockstates/machine_wind_turbine.json
+assets/hbm/models/block/machine_solar_panel.json
+assets/hbm/models/block/machine_wind_turbine.json
+assets/hbm/models/item/machine_solar_panel.json
+assets/hbm/models/item/machine_wind_turbine.json
+assets/hbm/items/machine_solar_panel.json
+assets/hbm/items/machine_wind_turbine.json
+data/hbm/recipe/machine_solar_panel.json
+data/hbm/recipe/machine_wind_turbine.json
+data/hbm/loot_table/blocks/machine_solar_panel.json
+data/hbm/loot_table/blocks/machine_wind_turbine.json

@@ -180,7 +180,9 @@ public final class PowerNetwork {
                                     && !gather.seenProviding.contains(handler)
                                     && handler.getPowerAvailable() > 0L
                                     && gather.seenProviding.add(handler);
+                            boolean shaftNet = node.data.shaft();
                             boolean receive = handler instanceof IEnergyReceiverMK2
+                                    && shaftNet == (handler instanceof IShaftNetOnly) // shaft turbine <-> shaft cables only
                                     && MachineCaps.accepts(be, side, CapRole.POWER_IN)
                                     && !gather.seenReceiving.contains(handler)
                                     && Math.min(handler.getMaxPower() - handler.getPower(), handler.getReceiverSpeed()) > 0L

@@ -1,11 +1,12 @@
 package com.hbm.api.energymk2;
 
+import com.hbm.blocks.network.BlockShaftCable;
 import com.hbm.uninos.graph.IGraphProvider;
 import com.hbm.uninos.graph.NodeNetwork;
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.block.state.BlockState;
 
-/** Cables carry no data of their own, and every conductor interconnects, exactly as 1.7 had it. */
+/** Ordinary cables interconnect; shaft cables interconnect only with each other. */
 public final class PowerGraphProvider implements IGraphProvider<CableData> {
 
     public static final PowerGraphProvider INSTANCE = new PowerGraphProvider();
@@ -14,12 +15,12 @@ public final class PowerGraphProvider implements IGraphProvider<CableData> {
 
     @Override
     public CableData createData(BlockState state) {
-        return CableData.INSTANCE;
+        return state.getBlock() instanceof BlockShaftCable ? CableData.SHAFT : CableData.INSTANCE;
     }
 
     @Override
     public boolean dataCompatible(CableData a, CableData b) {
-        return true;
+        return a.shaft() == b.shaft();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hbm.blocks.network;
 
 import com.hbm.api.energymk2.IEnergyConnectorBlock;
+import com.hbm.api.energymk2.IShaftNetOnly;
 import com.hbm.api.energymk2.PowerGraph;
 import com.hbm.api.energymk2.PowerGraphProvider;
 import com.hbm.capability.MachineCaps;
@@ -104,8 +105,11 @@ public class BlockCable extends CompatBlock implements TickingBlock, SimpleWater
      * machine footprints connect without a BlockEntity at every cell) OR a tile-level
      * {@link IEnergyConnectorMK2}. {@code dir.getOpposite()} is the neighbour's side facing the cable.
      */
-    private static boolean canConnectTo(LevelReader level, BlockPos pos, Direction dir) {
+    protected boolean connectsTo(LevelReader level, BlockPos pos, Direction dir) {
         BlockPos neighbour = pos.relative(dir);
+        var nb = level.getBlockState(neighbour).getBlock();
+        if (nb instanceof IShaftNetOnly || level.getBlockEntity(neighbour) instanceof IShaftNetOnly) return false;
+        if (nb instanceof BlockShaftCable) return false;
         ForgeDirection neighbourSide = ForgeDirection.getOrientation(dir.getOpposite());
 
         if (level.getBlockState(neighbour).getBlock() instanceof IEnergyConnectorBlock connectorBlock
@@ -125,7 +129,7 @@ public class BlockCable extends CompatBlock implements TickingBlock, SimpleWater
         BlockState state = this.defaultBlockState()
                 .setValue(WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER);
         for (Map.Entry<Direction, BooleanProperty> e : PROPERTY_BY_DIRECTION.entrySet()) {
-            state = state.setValue(e.getValue(), canConnectTo(level, pos, e.getKey()));
+            state = state.setValue(e.getValue(), connectsTo(level, pos, e.getKey()));
         }
         return state;
     }
@@ -137,7 +141,7 @@ public class BlockCable extends CompatBlock implements TickingBlock, SimpleWater
             ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
         return state.setValue(PROPERTY_BY_DIRECTION.get(directionToNeighbour),
-                canConnectTo(level, pos, directionToNeighbour));
+                connectsTo(level, pos, directionToNeighbour));
     }
 
     @Override
